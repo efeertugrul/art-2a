@@ -1,17 +1,7 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 import numpy as np
 import math
 import time
-import pandas as pd
-from datetime import datetime
-from sklearn.preprocessing import StandardScaler
-from sklearn.decomposition import PCA
-import matplotlib.pyplot as plt
+
 
 #call for the data set.
 def calculate_norm(array):
