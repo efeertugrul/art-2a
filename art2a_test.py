@@ -87,7 +87,7 @@ def art2a_predict(vigi, inputs, feature_size, weights,file=None):
     print("Vigilance value {}: {} clusters".format(vigi, max(clusters)+1))
     return np.array(clusters)
 
-def art2a_train(vigi, inputs, feature_size, file=None ,cycle=1):
+def art2a_train(vigi, inputs, feature_size, file=None ,cycle=1, verbose=False):
     """
     This wersion returns weight array also for labeling test data in predict art function
     Returns clusters and 2D weight array
@@ -108,12 +108,13 @@ def art2a_train(vigi, inputs, feature_size, file=None ,cycle=1):
                     clusters.append(w_i)
             else:
                 #create a new weight
-                weight_array.resize(len(weight_array)+1, feature_size)
+                weight_array.resize(len(weight_array)+1, feature_size, refcheck=False)
                 weight_array[len(weight_array)-1] = normalized_inputs[i]
                 if(c == cycle-1):
                     clusters.append(len(weight_array)-1)
         cycle_end = time.time() - cycle_start
-        print("Cycle {} has ended in {} for vigilance value {}".format(c+1, cycle_end, vigi))
+        if verbose:
+            print("Cycle {} has ended in {} for vigilance value {}".format(c+1, cycle_end, vigi))
     end = time.time()
     print("Art2A ended in: ", end-start)
     if(file!=None):
